@@ -15,11 +15,14 @@
       <option value="ETHUSDT"> ETHUSDT </option>
     </select>
     <label>entry_price:</label>
-    <input v-model="entry_price" type="number">
+    <input v-model="entry_price" type="number" step="0.01">
     <label>dollar_value:</label>
-    <input v-model="dollar_value" type="number">
+    <input v-model="dollar_value" type="number" step="0.01">
     <label>coin_value:</label>
-    <input v-model="coin_value" type="number" step="0.00001">
+    <div class="wrapper">
+    <input class="inputSpan" v-model="coin_value" type="number" step="0.00001"  disabled />
+    <span  @click="handleRatio" class="material-icons x">calculate</span>
+    </div>
     <label>notes:</label>
     <input v-model="notes"   >
     <button> EDIT </button>
@@ -94,7 +97,14 @@ export default {
           } )
           .catch(err => console.log(err.message))
 
-    }
+    },
+    handleRatio(){
+
+      this.coin_value = (this.dollar_value / this.entry_price).toFixed(5)
+
+    },
+
+
 
 
 

@@ -13,9 +13,9 @@
       <option value="ETHUSDT"> ETHUSDT </option>
     </select>
     <label>Entry Price:</label>
-    <input v-model="entry_price" type="number">
+    <input v-model="entry_price" type="number" step="0.01">
     <label>Dollar Value:</label>
-    <input v-model="dollar_value" type="number">
+    <input v-model="dollar_value" type="number" step="0.01">
     <label>Coin Value:   </label>
     <div class="wrapper">
     <input class="inputSpan" v-model="coin_value" type="number" step="0.00001"  disabled />

@@ -158,10 +158,11 @@ export default {
       balanceSheet[currency].assetValue = 0
       balanceSheet[currency].balanceSheetCoin = 0
 
-
       balanceSheet[currency].assetValue = balanceSheet[currency].coinValue * this.last_price_coin[currency];
       balanceSheet[currency].balanceSheetCoin = balanceSheet[currency].assetValue - balanceSheet[currency].dollarValue;
     }
+
+    this.balanceSheet= balanceSheet;
 
     console.log(balanceSheet['BTCUSDT'].dollarValue)
     console.log(balanceSheet['BTCUSDT'].coinValue)

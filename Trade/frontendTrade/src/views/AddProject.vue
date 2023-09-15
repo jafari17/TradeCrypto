@@ -18,7 +18,7 @@
     <input v-model="dollar_value" type="number">
     <label>Coin Value:   </label>
     <div class="wrapper">
-    <input class="inputSpan" v-model="coin_value" type="number" step="0.001"  />
+    <input class="inputSpan" v-model="coin_value" type="number" step="0.00001"  disabled />
     <span  @click="handleRatio" class="material-icons x">calculate</span>
     </div>
 
@@ -40,7 +40,7 @@ export default {
       currency:'',
       entry_price:0,
       dollar_value:0,
-      coin_value:0,
+      coin_value:(this.dollar_value / this.entry_price).toFixed(5),
       notes:'  ',
     }
   },
@@ -48,7 +48,7 @@ export default {
 
     handleRatio(){
 
-      this.coin_value = (this.dollar_value / this.entry_price).toFixed(3)
+      this.coin_value = (this.dollar_value / this.entry_price).toFixed(5)
 
     },
 

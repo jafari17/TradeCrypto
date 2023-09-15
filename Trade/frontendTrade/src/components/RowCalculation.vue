@@ -16,7 +16,12 @@
           <br/>
         <th> Balance Sheet : {{balance_sheet_btc.toFixed(2)}}</th>
       </tr>
-          </div>
+
+            <div class="icons">
+               <span  @click="HandleRefresh" class="material-icons">refresh</span>
+            </div>
+
+    </div>
   </div>
     <div class="project" >
     <div class="actions">
@@ -35,7 +40,7 @@
       </tr>
 
       <div class="icons">
-         <span  @click="HandleRefresh" class="material-icons ">refresh</span>
+         <span  @click="HandleRefresh" class="material-icons">refresh</span>
       </div>
 
     </div>
@@ -62,6 +67,9 @@ export default {
       asset_value_eth:0.0,
       balance_sheet_eth:0.0,
 
+      balanceSheet: {},
+
+
     }
   },
   mounted() {
@@ -78,7 +86,7 @@ export default {
             console.log(this.last_price_coin.BTCUSDT)
             console.log(this.last_price_coin.BTCUSDT)
             this.HandelFor()
-            this.calculateBalanceSheet()
+            // this.calculateBalanceSheet()
           })
     },
     HandelFor() {
@@ -148,27 +156,25 @@ export default {
       }
       console.log(currency)
       balanceSheet[currency].assetValue = 0
-      balanceSheet[currency].balanceSheet = 0
+      balanceSheet[currency].balanceSheetCoin = 0
 
 
       balanceSheet[currency].assetValue = balanceSheet[currency].coinValue * this.last_price_coin[currency];
-      balanceSheet[currency].balanceSheet = balanceSheet[currency].assetValue - balanceSheet[currency].dollarValue;
+      balanceSheet[currency].balanceSheetCoin = balanceSheet[currency].assetValue - balanceSheet[currency].dollarValue;
     }
 
     console.log(balanceSheet['BTCUSDT'].dollarValue)
     console.log(balanceSheet['BTCUSDT'].coinValue)
     console.log(balanceSheet['BTCUSDT'].assetValue)
-    console.log(balanceSheet['BTCUSDT'].balanceSheet)
+    console.log(balanceSheet['BTCUSDT'].balanceSheetCoin)
 
     console.log(balanceSheet['ETHUSDT'].dollarValue)
     console.log(balanceSheet['ETHUSDT'].coinValue)
     console.log(balanceSheet['ETHUSDT'].assetValue)
-    console.log(balanceSheet['ETHUSDT'].balanceSheet)
+    console.log(balanceSheet['ETHUSDT'].balanceSheetCoin)
 
 
-
-
-    return balanceSheet;
+    this.balanceSheet= balanceSheet;
      }
     }
 }

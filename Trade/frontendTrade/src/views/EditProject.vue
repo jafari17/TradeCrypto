@@ -19,7 +19,7 @@
     <label>dollar_value:</label>
     <input v-model="dollar_value" type="number">
     <label>coin_value:</label>
-    <input v-model="coin_value" type="number" step="0.01">
+    <input v-model="coin_value" type="number" step="0.00001">
     <label>notes:</label>
     <input v-model="notes"   >
     <button> EDIT </button>

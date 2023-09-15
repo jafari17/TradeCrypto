@@ -1,16 +1,16 @@
 <template>
-  <div class="project" :class="{star: project.star  }">
+
+  <div class="project" >
       <div class="actions">
-         <table>
-          <tr>
+
+
             <th><h3 @click="showDetails = !showDetails">{{project.entry_date}} </h3></th>
             <th><p>{{project.type_position}}</p></th>
             <th>{{project.currency}}</th>
-            <th>{{project.entry_price}}</th>
-            <th>{{project.dollar_value}}</th>
+            <th>{{parseFloat(project.entry_price)}}</th>
+            <th>{{parseFloat(project.dollar_value)}}</th>
             <th>{{project.coin_value}}</th>
-          </tr>
-        </table>
+
           <div class="icons">
           <router-link :to="{name: 'EditProject', params:{id:project.id}}">
             <span class="material-icons">edit</span>
@@ -21,6 +21,7 @@
 <!--         <span  :class="{spanstar: project.type_position }"  class="material-icons ">star</span>-->
         </div>
       </div>
+
       <div v-if="showDetails " class="details">
         <p>{{project.notes}} </p>
       </div>
@@ -37,7 +38,7 @@ export default {
   data() {
     return {
       showDetails: false,
-      uri: 'http://127.0.0.1:8000/project/' + this.project.id + '/'
+      uri: "http://127.0.0.1:8000//portfolio/api/" + this.project.id + '/'
     }
   },
   methods: {
@@ -84,7 +85,7 @@ h3{
 .material-icons{
   font-size: 24px;
   margin-left: 10px;
-  color:#bbb;
+  color:blue;
   cursor: pointer;
 }
 .material-icons:hover{
@@ -98,7 +99,7 @@ h3{
 td, th {
   //border: 1px solid #dddddd;
   text-align: left;
-  width: 240px;
+  width: 110px;
 }
 
 

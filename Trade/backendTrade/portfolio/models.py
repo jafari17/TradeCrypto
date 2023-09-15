@@ -4,11 +4,11 @@ from django.db import models
 
 class Portfolio(models.Model):
     entry_date = models.DateField()
-    type_position = models.BooleanField()
+    type_position = models.CharField(max_length=20)
     currency = models.CharField(max_length=20)
-    entry_price = models.IntegerField()
-    dollar_value = models.IntegerField()
-    coin_value = models.IntegerField()
+    entry_price = models.DecimalField(max_digits=12, decimal_places=3)
+    dollar_value = models.DecimalField(max_digits=12, decimal_places=3)
+    coin_value = models.DecimalField(max_digits=12, decimal_places=3)
     notes = models.CharField(max_length=500, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

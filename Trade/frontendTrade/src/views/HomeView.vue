@@ -1,10 +1,31 @@
 <template>
   <div class="home">
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
 <!--        @star="handelStar"-->
-        <SingleProject :project="project" @delete="handleDelete"  />
-      </div>
+        <table>
+            <div class="project" >
+              <div class="actions">
+            <tr>
+              <th>entry date</th>
+              <th>type </th>
+              <th>currency</th>
+              <th>entry price</th>
+              <th>dollar value</th>
+              <th>coin value</th>
+            </tr>
+
+            </div>
+          </div>
+
+
+          <tr>
+            <div v-for="project in projects" :key="project.id">
+              <SingleProject :project="project" @delete="handleDelete"  />
+            </div>
+          </tr>
+          <RowCalculation :projects="projects"/>
+        </table>
+
     </div>
   </div>
 </template>
@@ -14,10 +35,11 @@
 
 import axios from "axios";
 import SingleProject from "@/components/SingleProject.vue";
+import RowCalculation from "@/components/RowCalculation.vue";
 
 export default {
   name: 'HomeView',
-  components: {SingleProject},
+  components: {SingleProject, RowCalculation},
   data(){
     return {
       projects: [],

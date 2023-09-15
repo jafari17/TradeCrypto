@@ -1,7 +1,7 @@
 <template>
   <div class="main-nav">
-    <router-link :to="{name: 'home'}">Film list</router-link>
-    <router-link :to="{name: 'AddProject'}">Add a new Film</router-link>
+    <router-link :to="{name: 'home'}">Portfolio</router-link>
+    <router-link :to="{name: 'AddProject'}">Add a new Position</router-link>
   </div>
 </template>
 

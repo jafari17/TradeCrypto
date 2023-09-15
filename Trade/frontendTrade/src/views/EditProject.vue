@@ -1,20 +1,28 @@
 <template>
   <form @submit.prevent="handleEdit" >
-    <label>entry date:</label>
+   <label>entry date:</label>
     <input v-model="entry_date" type="date" required>
     <label>type position:</label>
-    <input v-model="type_position" type="checkbox">
+<!--    <input v-model="type_position" type="checkbox">-->
+    <select v-model="type_position">
+      <option value="buy"> Buy </option>
+      <option value="sell"> Sell </option>
+    </select>
     <label>currency:</label>
-    <input v-model="currency">
+<!--    <input v-model="currency">-->
+    <select v-model="currency">
+      <option value="BTCUSDT"> BTCUSDT </option>
+      <option value="ETHUSDT"> ETHUSDT </option>
+    </select>
     <label>entry_price:</label>
-    <input v-model="entry_price">
+    <input v-model="entry_price" type="number">
     <label>dollar_value:</label>
-    <input v-model="dollar_value">
+    <input v-model="dollar_value" type="number">
     <label>coin_value:</label>
-    <input v-model="coin_value">
+    <input v-model="coin_value" type="number" step="0.01">
     <label>notes:</label>
-    <input v-model="notes" >
-    <button> Add </button>
+    <input v-model="notes"   >
+    <button> EDIT </button>
   </form>
 </template>
 

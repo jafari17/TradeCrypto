@@ -5,15 +5,14 @@
         <table>
             <div class="project" >
               <div class="actions">
-            <tr>
-              <th>entry date</th>
-              <th>type </th>
-              <th>currency</th>
-              <th>entry price</th>
-              <th>dollar value</th>
-              <th>coin value</th>
-            </tr>
-
+                <tr>
+                  <th>entry date</th>
+                  <th>type</th>
+                  <th>currency</th>
+                  <th>entry price</th>
+                  <th>dollar value</th>
+                  <th>coin value</th>
+                </tr>
             </div>
           </div>
 

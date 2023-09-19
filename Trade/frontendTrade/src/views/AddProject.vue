@@ -13,13 +13,12 @@
       <option value="ETHUSDT"> ETHUSDT </option>
     </select>
     <label>Entry Price:</label>
-    <input v-model="entry_price" type="number" step="0.01">
+    <input @keyup="handleRatio" v-model="entry_price" type="number" step="0.01">
     <label>Dollar Value:</label>
-    <input v-model="dollar_value" type="number" step="0.01">
+    <input @keyup="handleRatio"  v-model="dollar_value" type="number" step="0.01">
     <label>Coin Value:   </label>
     <div class="wrapper">
-    <input class="inputSpan" v-model="coin_value" type="number" step="0.00001"  disabled />
-    <span  @click="handleRatio" class="material-icons x">calculate</span>
+    <input   v-model="coin_value" type="number" step="0.00001"  disabled />
     </div>
 
     <label>notes:</label>
@@ -38,17 +37,22 @@ export default {
       entry_date: '',
       type_position: false,
       currency:'',
-      entry_price:0,
-      dollar_value:0,
-      coin_value:(this.dollar_value / this.entry_price).toFixed(5),
+      entry_price: '',
+      dollar_value:'',
+      coin_value:'',
       notes:'  ',
     }
   },
+
   methods:{
 
     handleRatio(){
 
-      this.coin_value = (this.dollar_value / this.entry_price).toFixed(5)
+      if(this.dollar_value !== 0  &&  this.entry_price !== 0 ){
+
+        this.coin_value = (this.dollar_value / this.entry_price).toFixed(5)
+
+      }
 
     },
 
@@ -152,10 +156,6 @@ select{
     position: relative;
 }
 
-.inputSpan {
-    padding-left: 50px;
-
-}
 
 .wrapper span {
     position: absolute;

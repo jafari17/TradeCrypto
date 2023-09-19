@@ -28,9 +28,15 @@
 </template>
 
 
-<script setup>
+<script >
+
+export default {
+  props: ['balanceSheet'],
+  data() {
+  },
+}
 
 </script>
-<style scoped>
+<style >
 
 </style>

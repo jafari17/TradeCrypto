@@ -1,75 +1,44 @@
 <template>
 
+<div v-for="(value, key1) in balanceSheets" >
+
   <div class="project" >
     <div class="actions">
-
       <tr>
-        <th>  --- BTCUSDT --- </th>
+        <th>  ---  {{ key1 }}  --- </th>
           <br/>
-        <th> Dollar Value: {{dollar_value_calculation_btc.toFixed(2)}}</th>
+        <th> Dollar Value: {{value.dollarValue.toFixed(2)}}</th>
           <br/>
-        <th> Coin Value: {{coin_value_calculation_btc.toFixed(2)}}</th>
+        <th> Coin Value: {{value.coinValue.toFixed(2)}}</th>
           <br/>
-        <th> Last Price BTCUSDT: {{last_price_coin.BTCUSDT}}</th>
+        <th> Last Price {{ key1 }}: {{last_price_coin[key1] }}</th>
           <br/>
-        <th> Asset Value: {{asset_value_btc.toFixed(2)}}</th>
+        <th> Asset Value: {{value.assetValue.toFixed(2)}}</th>
           <br/>
-        <th> Balance Sheet : {{balance_sheet_btc.toFixed(2)}}</th>
+        <th> Balance Sheet : {{value.balanceSheetCoin.toFixed(2)}}</th>
       </tr>
-
             <div class="icons">
                <span  @click="HandleRefresh" class="material-icons">refresh</span>
             </div>
-
     </div>
   </div>
-    <div class="project" >
-    <div class="actions">
-      <tr>
-        <th>  --- ETHUSDT --- </th>
-          <br/>
-        <th> Dollar Value: {{dollar_value_calculation_eth.toFixed(2)}}</th>
-          <br/>
-        <th> Coin Value: {{coin_value_calculation_eth.toFixed(2)}}</th>
-          <br/>
-        <th> Last Price ETHUSDT: {{last_price_coin.ETHUSDT}}</th>
-          <br/>
-        <th> Asset Value: {{asset_value_eth.toFixed(2)}}</th>
-          <br/>
-        <th> Balance Sheet : {{balance_sheet_eth.toFixed(2)}}</th>
-      </tr>
+</div>
 
-      <div class="icons">
-         <span  @click="HandleRefresh" class="material-icons">refresh</span>
-      </div>
-
-    </div>
-  </div>
 
 </template>
 
 <script >
 import axios from "axios";
+import SingleProject from "@/components/SingleProject.vue";
+import BalanceSheet from "@/components/BalanceSheet.vue";
 
 export default {
+  components: {BalanceSheet, SingleProject},
   props: ['projects'],
   data(){
     return{
       last_price_coin:0.0,
-
-      dollar_value_calculation_btc:0.0,
-      coin_value_calculation_btc: 0.0,
-      asset_value_btc:0.0,
-      balance_sheet_btc:0.0,
-
-      dollar_value_calculation_eth:0.0,
-      coin_value_calculation_eth: 0.0,
-      asset_value_eth:0.0,
-      balance_sheet_eth:0.0,
-
-      balanceSheet: {},
-
-
+      balanceSheets: {},
     }
   },
   mounted() {
@@ -81,59 +50,13 @@ export default {
           .get("http://127.0.0.1:8000//exchange/lastPriceApi")
           .then(response => {
             this.last_price_coin = response.data
-            console.log(this.last_price_coin.BTCUSDT)
-            console.log(this.last_price_coin.BTCUSDT)
-            console.log(this.last_price_coin.BTCUSDT)
-            console.log(this.last_price_coin.BTCUSDT)
-            this.HandelFor()
-            // this.calculateBalanceSheet()
+            console.log(this.last_price_coin)
+            console.log(this.last_price_coin)
+            console.log(this.last_price_coin)
+            console.log(this.last_price_coin)
+            this.calculateBalanceSheet()
           })
     },
-    HandelFor() {
-      this.handelZero()
-      for (const project of this.projects) {
-
-        if (project.currency == 'BTCUSDT') {
-          if (project.type_position === 'sell') {
-            this.dollar_value_calculation_btc -= parseFloat(project.dollar_value)
-            this.coin_value_calculation_btc -= parseFloat(project.coin_value)
-          } else if (project.type_position === 'buy') {
-            this.dollar_value_calculation_btc += parseFloat(project.dollar_value)
-            this.coin_value_calculation_btc += parseFloat(project.coin_value)
-          }
-
-          this.asset_value_btc = this.last_price_coin.BTCUSDT * this.coin_value_calculation_btc
-          this.balance_sheet_btc = this.asset_value_btc - this.dollar_value_calculation_btc
-
-        }
-
-        if (project.currency == 'ETHUSDT') {
-          if (project.type_position === 'sell') {
-            this.dollar_value_calculation_eth -= parseFloat(project.dollar_value)
-            this.coin_value_calculation_eth -= parseFloat(project.coin_value)
-          } else if (project.type_position === 'buy') {
-            this.dollar_value_calculation_eth += parseFloat(project.dollar_value)
-            this.coin_value_calculation_eth += parseFloat(project.coin_value)
-          }
-
-
-          this.asset_value_eth = this.last_price_coin.ETHUSDT * this.coin_value_calculation_eth
-          this.balance_sheet_eth = this.asset_value_eth - this.dollar_value_calculation_eth
-        }
-      }
-    },
-    handelZero(){
-      this.dollar_value_calculation_btc= 0.0
-      this.coin_value_calculation_btc=  0.0
-      this.asset_value_btc= 0.0
-      this.balance_sheet_btc= 0.0
-
-      this.dollar_value_calculation_eth= 0.0
-      this.coin_value_calculation_eth=  0.0
-      this.asset_value_eth= 0.0
-      this.balance_sheet_eth= 0.0
-    },
-
 
     calculateBalanceSheet() {
     const balanceSheet = {};
@@ -162,7 +85,17 @@ export default {
       balanceSheet[currency].balanceSheetCoin = balanceSheet[currency].assetValue - balanceSheet[currency].dollarValue;
     }
 
-    this.balanceSheet= balanceSheet;
+    this.balanceSheets= balanceSheet;
+
+    //         test log
+
+    for (let bs in balanceSheet){
+      console.log(bs)
+      for (let bx in balanceSheet[bs]){
+      console.log(bx)
+      console.log(balanceSheet[bs][bx])
+      }
+    }
 
     console.log(balanceSheet['BTCUSDT'].dollarValue)
     console.log(balanceSheet['BTCUSDT'].coinValue)
@@ -174,22 +107,15 @@ export default {
     console.log(balanceSheet['ETHUSDT'].assetValue)
     console.log(balanceSheet['ETHUSDT'].balanceSheetCoin)
 
-
-    this.balanceSheet= balanceSheet;
      }
-    }
+  }
 }
 </script>
 
-
-
 <style scoped >
-
 td, th {
   //border: 1px solid #dddddd;
   text-align: left;
   width: 310px;
 }
-
-
 </style>
